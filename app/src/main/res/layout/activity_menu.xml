@@ -31,8 +31,8 @@
                 android:layout_width="338dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/seco_guanta"
-                android:contentDescription="TODO" />
+                android:contentDescription="TODO"
+                app:srcCompat="@drawable/seco_guanta" />
 
             <LinearLayout
                 android:layout_width="match_parent"
