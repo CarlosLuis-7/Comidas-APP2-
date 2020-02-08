@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (task.isSuccessful()) {
 
                             Toast.makeText(MainActivity.this, "Bienvenido: " + TextEmail.getText(), Toast.LENGTH_LONG).show();
-                            Intent abrir_v2 = new Intent(MainActivity.this, DetalleMenu.class );
+                            Intent abrir_v2 = new Intent(MainActivity.this, Menu.class );
                             startActivity(abrir_v2);
 
 
