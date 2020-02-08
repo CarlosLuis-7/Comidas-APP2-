@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "52228402996",
+    "firebase_url": "https://comidas-app-39771.firebaseio.com",
+    "project_id": "comidas-app-39771",
+    "storage_bucket": "comidas-app-39771.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52228402996:android:885409db3560cb299d3f61",
+        "android_client_info": {
+          "package_name": "com.example.comidas_app_"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "52228402996-suhusslcpcbar9telibfi7stmqmjdlcr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.comidas_app_",
+            "certificate_hash": "0ce25aed7d21fb84d088a710cd3e2b99a47d7b1a"
+          }
+        },
+        {
+          "client_id": "52228402996-7obiusnd7rcdqvbcdd3u60c9saap1k9v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.comidas_app_",
+            "certificate_hash": "94a738127702e68cdcf43ac47204acca3c3d69a6"
+          }
+        },
+        {
+          "client_id": "52228402996-k62h11lh48kutc1kfnhmm60g55pc6bmn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX6q_FUxzicfah_BquNYlcTHSYJFaRaho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "52228402996-k62h11lh48kutc1kfnhmm60g55pc6bmn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
