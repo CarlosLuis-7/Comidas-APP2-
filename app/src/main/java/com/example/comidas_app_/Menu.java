@@ -1,11 +1,14 @@
 package com.example.comidas_app_;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.comidas_app_.Modelo.clsMenu;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,9 +19,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class Menu extends AppCompatActivity {
     TextView txt1, txt2, txt3, txt4,pre1,pre2,pre3,pre4;
+    CardView car, car1,car2,car3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,61 +36,32 @@ public class Menu extends AppCompatActivity {
         pre2 = findViewById(R.id.txtprecio2);
         pre3 = findViewById(R.id.txtprecio3);
         pre4 = findViewById(R.id.txtPrecio4);
+
         getData();
     }
     public void getData(){
-        //direccion de web service
-        String sql = "https://appcomida.azurewebsites.net/api/Menus";
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-        URL url=null;
-        HttpURLConnection conn;
-
-
-        try {
-            url = new URL(sql);
-            conn=(HttpURLConnection) url.openConnection();
-
-            conn.setRequestMethod("GET");
-            conn.connect();
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
-            String json="";
-
-            while((inputLine=in.readLine())!=null){
-                response.append(inputLine);
-
+        ConsumoRest datos = new ConsumoRest();
+        ArrayList<clsMenu> Datas = datos.getDataMenu();
+        for(int i = 0;i<Datas.size();i++){
+            if (i == 0) {
+                txt1.setText(Datas.get(i).getPlato());
+                pre1.setText(Double.toString(Datas.get(i).getPrecio()));
             }
-            json = response.toString();
-            JSONArray jsonArray = null;
-
-            jsonArray = new JSONArray(json);
-            String Plato = "";
-            String Precio = "";
-            String Descrip = "";
-
-            for (int i=0; i<jsonArray.length();i++){
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                Plato =jsonObject.optString("plato");
-                Precio = "Precio: $ "+jsonObject.optString("precio");
-
-
+            else if (i == 1) {
+                txt2.setText(Datas.get(i).getPlato());
+                pre2.setText(Double.toString(Datas.get(i).getPrecio()));
             }
-            txt1.setText(Plato);
-            pre1.setText(Precio);
+            else if (i == 2) {
+                txt3.setText(Datas.get(i).getPlato());
+                pre3.setText(Double.toString(Datas.get(i).getPrecio()));
+            }
+            else if (i == 3) {
+                txt4.setText(Datas.get(i).getPlato());
+                pre4.setText(Double.toString(Datas.get(i).getPrecio()));
+            }
+
 
         }
-        catch (IOException e){
-            Toast.makeText(getApplicationContext(),e.getMessage(), Toast.LENGTH_LONG).show();
 
-
-        } catch (JSONException e) {
-            Toast.makeText(getApplicationContext(),e.getMessage(), Toast.LENGTH_LONG).show();
-
-        }
     }
 }

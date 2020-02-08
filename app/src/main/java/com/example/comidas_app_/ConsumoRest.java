@@ -1,11 +1,9 @@
 package com.example.comidas_app_;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
 import android.os.StrictMode;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.comidas_app_.Modelo.clsMenu;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,24 +14,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 
-public class DetalleMenu extends AppCompatActivity {
+public  class ConsumoRest {
 
-    TextView txtNombrePlato, txtDetallePlato;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalle_menu);
-        txtNombrePlato = findViewById(R.id.txtNombrePlato);
-        txtDetallePlato = findViewById(R.id.txtDescripcionPlato);
-
-        getData();
-    }
-
-
-    public void getData(){
+    public  ArrayList<clsMenu> getDataMenu()
+    {
+        ArrayList<clsMenu> lstMenu = new ArrayList<clsMenu>();
         //direccion de web service
         String sql = "https://appcomida.azurewebsites.net/api/Menus";
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -63,27 +51,33 @@ public class DetalleMenu extends AppCompatActivity {
             JSONArray jsonArray = null;
 
             jsonArray = new JSONArray(json);
-            String nombrePlato = "";
+            String Plato = "";
+            String Precio = "";
+            String Descrip = "";
 
 
             for (int i=0; i<jsonArray.length();i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                nombrePlato +="plato" +i+""+jsonObject.optString("plato")+ "\n";
-
+                clsMenu dtoMenu = new clsMenu();
+                dtoMenu.setCodigo(Integer.parseInt(jsonObject.optString("codigo")));
+                dtoMenu.setPlato(jsonObject.optString("plato"));
+                dtoMenu.setDescripcion(jsonObject.optString("descripcion"));
+                dtoMenu.setPrecio(Double.parseDouble(jsonObject.optString("precio")));
+                lstMenu.add(dtoMenu);
 
             }
-            txtNombrePlato.setText(nombrePlato);
+            //txt1.setText(Plato);
+           // pre1.setText(Precio);
 
         }
         catch (IOException e){
-            Toast.makeText(getApplicationContext(),e.getMessage(), Toast.LENGTH_LONG).show();
+
 
 
         } catch (JSONException e) {
-            Toast.makeText(getApplicationContext(),e.getMessage(), Toast.LENGTH_LONG).show();
+
 
         }
+        return lstMenu;
     }
-
 }

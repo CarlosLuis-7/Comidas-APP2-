@@ -36,7 +36,7 @@
             android:textSize="30dp" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/txtNombrePlato"
             android:layout_width="match_parent"
             android:layout_height="34dp" />
 
@@ -48,7 +48,7 @@
             android:textSize="30dp" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/txtDescripcionPlato"
             android:layout_width="match_parent"
             android:layout_height="36dp" />
 
