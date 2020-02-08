@@ -8,8 +8,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="344dp"
-        android:layout_height="302dp"
+        android:layout_width="331dp"
+        android:layout_height="363dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +46,12 @@
             android:layout_height="67dp"
             android:text="Login" />
 
+
+
+
+
     </LinearLayout>
+
 
     <ImageView
         android:id="@+id/imageView2"
