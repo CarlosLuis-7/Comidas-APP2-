@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void registrarUsuario() {
 
         //Obtenemos el email y la contraseña desde las cajas de texto
-        String email = TextEmail.getText().toString().trim();
+ /*       String email = TextEmail.getText().toString().trim();
         String password = TextPassword.getText().toString().trim();
 
         //Verificamos que las cajas de texto no esten vacías
@@ -139,7 +139,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         progressDialog.dismiss();
                     }
                 });
+*/
 
+        Intent abrir_reg = new Intent(MainActivity.this, Registro.class );
+        startActivity(abrir_reg);
     }
 
     @Override
