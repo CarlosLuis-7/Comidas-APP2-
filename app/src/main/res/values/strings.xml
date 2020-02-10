@@ -13,5 +13,13 @@
     <string name="ingrese_su_numero_de_celular">Ingrese su numero de celular</string>
     <string name="ingrese_su_apellido">Ingrese su apellido</string>
     <string name="ingrese_su_nombre">Ingrese su nombre</string>
+    <string name="proprecio4">ProPrecio4</string>
+    <string name="proprecio3">ProPrecio3</string>
+    <string name="producto2">Producto2</string>
+    <string name="proprecio2">ProPrecio2</string>
+    <string name="prodprecio1">ProdPrecio1</string>
+    <string name="producto1">Producto1</string>
+    <string name="producto3">Producto3</string>
+    <string name="producto4">Producto4</string>
     <string name="todo">TODO</string>
 </resources>

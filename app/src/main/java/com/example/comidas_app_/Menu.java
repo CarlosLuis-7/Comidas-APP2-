@@ -3,8 +3,13 @@ package com.example.comidas_app_;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,9 +26,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class Menu extends AppCompatActivity {
-    TextView txt1, txt2, txt3, txt4,pre1,pre2,pre3,pre4;
-    CardView car, car1,car2,car3;
+public class Menu extends AppCompatActivity implements View.OnClickListener{
+    TextView txt1, txt2, txt3, txt4, pre1, pre2, pre3, pre4;
+    ImageView img1,img2,img3,img4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,25 +43,24 @@ public class Menu extends AppCompatActivity {
         pre3 = findViewById(R.id.txtprecio3);
         pre4 = findViewById(R.id.txtPrecio4);
 
+
         getData();
     }
-    public void getData(){
+
+    public void getData() {
         ConsumoRest datos = new ConsumoRest();
         ArrayList<clsMenu> Datas = datos.getDataMenu();
-        for(int i = 0;i<Datas.size();i++){
+        for (int i = 0; i < Datas.size(); i++) {
             if (i == 0) {
                 txt1.setText(Datas.get(i).getPlato());
                 pre1.setText(Double.toString(Datas.get(i).getPrecio()));
-            }
-            else if (i == 1) {
+            } else if (i == 1) {
                 txt2.setText(Datas.get(i).getPlato());
                 pre2.setText(Double.toString(Datas.get(i).getPrecio()));
-            }
-            else if (i == 2) {
+            } else if (i == 2) {
                 txt3.setText(Datas.get(i).getPlato());
                 pre3.setText(Double.toString(Datas.get(i).getPrecio()));
-            }
-            else if (i == 3) {
+            } else if (i == 3) {
                 txt4.setText(Datas.get(i).getPlato());
                 pre4.setText(Double.toString(Datas.get(i).getPrecio()));
             }
@@ -63,5 +68,48 @@ public class Menu extends AppCompatActivity {
 
         }
 
+    }
+
+    public void plato1(){
+        Intent abrir_prod1 = new Intent(Menu.this, DetalleMenu.class);
+        abrir_prod1.putExtra("resID",R.drawable.seco_guanta);
+        startActivity(abrir_prod1);
+
+    }
+    public void plato2(){
+        Intent abrir_prod1 = new Intent(Menu.this, DetalleMenu.class);
+        abrir_prod1.putExtra("resID",R.drawable.seco_pollo);
+        startActivity(abrir_prod1);
+
+    }
+    public void plato3(){
+        Intent abrir_prod1 = new Intent(Menu.this, DetalleMenu.class);
+        abrir_prod1.putExtra("resID",R.drawable.fritada);
+        startActivity(abrir_prod1);
+
+    }
+    public void plato4(){
+        Intent abrir_prod1 = new Intent(Menu.this, DetalleMenu.class);
+        abrir_prod1.putExtra("resID",R.drawable.ceviche_camaron);
+        startActivity(abrir_prod1);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.cv0:
+                plato1();
+                break;
+            case R.id.cv1:
+                plato2();
+                break;
+            case R.id.cv2:
+                plato3();
+                break;
+            case R.id.cv3:
+                plato4();
+                break;
+        }
     }
 }

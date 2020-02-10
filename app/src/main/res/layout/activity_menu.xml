@@ -19,7 +19,10 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cv0"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,11 +30,11 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/imgV1"
                 android:layout_width="338dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="TODO"
+                android:contentDescription="@string/todo"
                 app:srcCompat="@drawable/seco_guanta" />
 
             <LinearLayout
@@ -45,8 +48,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:clickable="false"
                     android:gravity="center|center_vertical"
-                    android:text="Producto1"
+                    android:text="@string/producto1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textStyle="bold" />
 
@@ -56,7 +60,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_horizontal|center_vertical"
-                    android:text="ProdPrecio1"
+                    android:text="@string/prodprecio1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
             </LinearLayout>
 
@@ -66,7 +70,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cv1"
         android:layout_width="match_parent"
-        android:layout_height="121dp">
+        android:layout_height="121dp"
+        android:onClick="onClick">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,9 +79,9 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="332dp"
-                android:layout_height="wrap_content"
+                android:id="@+id/imgV2"
+                android:layout_width="338dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/seco_pollo" />
 
@@ -91,7 +96,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="59dp"
                     android:gravity="center_horizontal|center_vertical"
-                    android:text="Producto2"
+                    android:text="@string/producto2"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textStyle="bold" />
 
@@ -100,7 +105,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="66dp"
                     android:gravity="center_horizontal|center_vertical"
-                    android:text="ProPrecio2"
+                    android:text="@string/proprecio2"
                     android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
@@ -109,7 +114,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cv2"
         android:layout_width="match_parent"
-        android:layout_height="125dp">
+        android:layout_height="125dp"
+        android:onClick="onClick">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -117,10 +123,11 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="334dp"
+                android:id="@+id/imgV3"
+                android:layout_width="338dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:contentDescription="@string/todo"
                 app:srcCompat="@drawable/fritada" />
 
             <LinearLayout
@@ -134,7 +141,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="63dp"
                     android:gravity="center_horizontal|center_vertical"
-                    android:text="Producto3"
+                    android:text="@string/producto3"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textStyle="bold" />
 
@@ -143,7 +150,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="64dp"
                     android:gravity="center_horizontal|center_vertical"
-                    android:text="ProPrecio3"
+                    android:text="@string/proprecio3"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
             </LinearLayout>
         </LinearLayout>
@@ -152,7 +159,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cv3"
         android:layout_width="match_parent"
-        android:layout_height="131dp">
+        android:layout_height="131dp"
+        android:onClick="onClick">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -160,8 +168,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="335dp"
+                android:id="@+id/imgV4"
+                android:layout_width="338dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/ceviche_camaron" />
@@ -177,7 +185,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:gravity="center_horizontal|center_vertical"
-                    android:text="Producto4"
+                    android:text="@string/producto4"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -187,7 +195,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="69dp"
                     android:gravity="center_horizontal|center_vertical"
-                    android:text="ProPrecio4"
+                    android:text="@string/proprecio4"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textSize="18sp" />
             </LinearLayout>

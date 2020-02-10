@@ -2,8 +2,11 @@ package com.example.comidas_app_;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +22,7 @@ import java.net.URL;
 
 
 public class DetalleMenu extends AppCompatActivity {
-
+    ImageView img;
     TextView txtNombrePlato, txtDetallePlato;
 
     @Override
@@ -28,7 +31,14 @@ public class DetalleMenu extends AppCompatActivity {
         setContentView(R.layout.activity_detalle_menu);
         txtNombrePlato = findViewById(R.id.txtNombrePlato);
         txtDetallePlato = findViewById(R.id.txtDescripcionPlato);
+        img = findViewById(R.id.imageView);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null)
+        {
+            int resid = bundle.getInt("resID");
+            img.setImageResource(resid);
 
+        }
         getData();
     }
 
