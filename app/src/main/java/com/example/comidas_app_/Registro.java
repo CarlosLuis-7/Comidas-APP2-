@@ -1,32 +1,37 @@
 package com.example.comidas_app_;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.Iterator;
 
 public class Registro extends AppCompatActivity {
-    private EditText nom,ape,usu,cel,con;
+    EditText nom,ape,usu,cel,con;
     private ProgressDialog progressDialog;
-    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
-        firebaseAuth = FirebaseAuth.getInstance();
         nom = findViewById(R.id.txtNom);
         ape = findViewById(R.id.txtApe);
         usu = findViewById(R.id.txtUsu);
@@ -35,64 +40,118 @@ public class Registro extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
     }
 
-    public void registrarUsuario(View V) {
-
-        //Obtenemos el email y la contraseña desde las cajas de texto
-        String usuario = usu.getText().toString().trim();
-        String password = con.getText().toString().trim();
-        String apellido = ape.getText().toString().trim();
-        String nombre = nom.getText().toString().trim();
-        String celular = cel.getText().toString().trim();
-
-
+    public void registrarUsuario()
+    {
         //Verificamos que las cajas de texto no esten vacías
-        if (TextUtils.isEmpty(usuario)) {
+        if (null == usu.getText()) {
             Toast.makeText(this, "Se debe ingresar un usuario", Toast.LENGTH_LONG).show();
             return;
         }
-        if (TextUtils.isEmpty(nombre)) {
+        if (null == nom.getText()) {
             Toast.makeText(this, "Se debe ingresar un nombre", Toast.LENGTH_LONG).show();
             return;
         }
-        if (TextUtils.isEmpty(apellido)) {
+        if (null == ape.getText()) {
             Toast.makeText(this, "Se debe ingresar un apellido", Toast.LENGTH_LONG).show();
             return;
         }
-        if (TextUtils.isEmpty(celular)) {
+        if (null == cel.getText()) {
             Toast.makeText(this, "Se debe ingresar un celular", Toast.LENGTH_LONG).show();
             return;
         }
 
-        if (TextUtils.isEmpty(password)) {
+        if (null == con.getText()) {
             Toast.makeText(this, "Falta ingresar la contraseña", Toast.LENGTH_LONG).show();
             return;
         }
 
+            String sql ="https://appcomida.azurewebsites.net/api/Usuarios";
+            URL url = null;
+            try {
+                // se crea la conexion al api: https://appcomida.azurewebsites.net/api/Usuarios
+                url = new URL(sql);
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+                //crear el objeto json para enviar por POST
+                JSONObject parametrosPost= new JSONObject();
+                parametrosPost.put("nombre",nom.getText());
+                parametrosPost.put("apellido",ape.getText());
+                parametrosPost.put("celular",cel.getText());
+                parametrosPost.put("usuar",usu.getText());
+                parametrosPost.put("pass",con.getText());
+
+                //DEFINIR PARAMETROS DE CONEXION
+                urlConnection.setReadTimeout(15000 /* milliseconds */);
+                urlConnection.setConnectTimeout(15000 /* milliseconds */);
+                urlConnection.setRequestMethod("POST");// se puede cambiar por delete ,put ,etc
+                urlConnection.setDoInput(true);
+                urlConnection.setDoOutput(true);
+
+
+                //OBTENER EL RESULTADO DEL REQUEST
+                OutputStream os = urlConnection.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                //writer.write(getPostDataString(parametrosPost));
+                writer.flush();
+                writer.close();
+                os.close();
+
+                int responseCode=urlConnection.getResponseCode();// conexion OK?
+                if(responseCode== HttpURLConnection.HTTP_OK){
+                    BufferedReader in= new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+
+                    StringBuffer sb= new StringBuffer("");
+                    String linea="";
+                    while ((linea=in.readLine())!= null){
+                        sb.append(linea);
+                        break;
+
+                    }
+                    in.close();
+                    Toast.makeText(getApplicationContext(),sb.toString(), Toast.LENGTH_SHORT);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Error: "+ responseCode, Toast.LENGTH_SHORT);
+                }
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         progressDialog.setMessage("Realizando registro en linea...");
         progressDialog.show();
+        }
 
+    //FUNCIONES----------------------------------------------------------------------
+    //Transformar JSON Obejct a String *******************************************
 
-/*        firebaseAuth.createUserWithEmailAndPassword(usuario, nombre, apellido, celular, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
+    public String getPostDataString(JSONObject params) throws Exception {
 
-                            Toast.makeText(Registro.this, "Se ha registrado el usuario: " + usu.getText(), Toast.LENGTH_LONG).show();
-                        } else {
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+        Iterator<String> itr = params.keys();
+        while(itr.hasNext()){
 
-                            if (task.getException() instanceof FirebaseAuthUserCollisionException) { // cuando haya una colision
+            String key= itr.next();
+            Object value = params.get(key);
 
+            if (first)
+                first = false;
+            else
+                result.append("&");
 
-                                Toast.makeText(Registro.this, "El usuario ya existe ", Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(Registro.this, "No se pudo registrar el usuario ", Toast.LENGTH_LONG).show();
-                            }
-                        }
-
-                        progressDialog.dismiss();
-                    }
-                });
-*/
+            result.append(URLEncoder.encode(key, "UTF-8"));
+            result.append("=");
+            result.append(URLEncoder.encode(value.toString(), "UTF-8"));
+        }
+        return result.toString();
     }
 }
+
