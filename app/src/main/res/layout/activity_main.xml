@@ -19,35 +19,36 @@
         app:layout_constraintVertical_bias="0.165">
 
         <EditText
-            android:id="@+id/txt_email"
+            android:id="@+id/txt_usuario"
             android:layout_width="match_parent"
             android:layout_height="72dp"
             android:ems="10"
-            android:hint="ingrese un correo"
-            android:inputType="textEmailAddress" />
+            android:hint="@string/ingrese_su_usuario"
+            android:inputType="text"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/txt_password"
             android:layout_width="match_parent"
             android:layout_height="58dp"
             android:ems="10"
-            android:hint="ingrese una contraseña"
-            android:inputType="textPassword" />
-
-        <Button
-            android:id="@+id/btn_registrar"
-            android:layout_width="match_parent"
-            android:layout_height="67dp"
-            android:text="Registrar" />
+            android:hint="@string/ingrese_una_contrase_a"
+            android:inputType="textPassword"
+            android:importantForAutofill="no" />
 
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="67dp"
-            android:text="Login" />
+            android:onClick="onClick"
+            android:text="@string/login" />
 
-
-
+        <Button
+            android:id="@+id/btn_registrar"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:onClick="onClick"
+            android:text="@string/registrar" />
 
 
     </LinearLayout>
