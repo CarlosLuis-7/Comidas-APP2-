@@ -74,9 +74,10 @@ public class Registro extends AppCompatActivity {
         }
 */
         Thread thread = new Thread(new Runnable() {
+
             @Override
             public void run() {
-                try {
+                try  {
                     String sql = "https://appcomida.azurewebsites.net/api/Usuarios";
 
                     URL url = new URL(sql);
@@ -88,6 +89,7 @@ public class Registro extends AppCompatActivity {
                     conn.setDoInput(true);
 
                     JSONObject parametrosPost = new JSONObject();
+                    parametrosPost.put("codigo", 0);
                     parametrosPost.put("nombre", nom.getText());
                     parametrosPost.put("apellido", ape.getText());
                     parametrosPost.put("celular", cel.getText());
@@ -105,9 +107,9 @@ public class Registro extends AppCompatActivity {
                     conn.disconnect();
                 } catch (Exception e) {
                     e.printStackTrace();
+                    Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
                 }
-            }
-        });
+            }});
 
         thread.start();
 
