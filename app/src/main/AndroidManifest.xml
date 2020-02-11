@@ -14,15 +14,20 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".Registro"></activity>
-        <activity android:name=".Menu" />
-        <activity android:name=".DetalleMenu"></activity>
-        <activity android:name=".MenuApp" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Menu">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity android:name=".DetalleMenu"></activity>
+        <activity android:name=".MenuApp">
+        </activity>
+        <activity android:name=".MainActivity">
+
         </activity>
     </application>
 

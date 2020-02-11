@@ -2,10 +2,10 @@ package com.example.comidas_app_;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,23 +23,58 @@ import java.net.URL;
 
 public class DetalleMenu extends AppCompatActivity {
     ImageView img;
-    TextView txtNombrePlato, txtDetallePlato;
-
+    TextView txtNombrePlato, txtDetallePlato, txtCantidad1;
+    Button btnAumentar, btnDisminuir;
+    private int contador=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_menu);
         txtNombrePlato = findViewById(R.id.txtNombrePlato);
         txtDetallePlato = findViewById(R.id.txtDescripcionPlato);
+        txtCantidad1= findViewById(R.id.txtCantidad1);
+        btnAumentar = findViewById(R.id.btnAumentar);
+        btnDisminuir = findViewById(R.id.btnDisminuir);
         img = findViewById(R.id.imageView);
         Bundle bundle = getIntent().getExtras();
-        if (bundle != null)
-        {
-            int resid = bundle.getInt("resID");
-            img.setImageResource(resid);
 
-        }
-        getData();
+
+        btnAumentar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                contador++;
+                txtCantidad1.setText(""+contador);
+            }
+        });
+
+        btnDisminuir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                contador --;
+                txtCantidad1.setText(""+contador );
+            }
+        });
+
+
+        int resid = bundle.getInt("resID");
+        img.setImageResource(resid);
+
+      /*  String resIDT4 = getIntent().getStringExtra("resIDT4");
+        String resIDT3 = getIntent().getStringExtra("resIDT3");
+        String resIDT2 = getIntent().getStringExtra("resIDT2");*/
+
+        String resIDT = getIntent().getStringExtra("resIDT");
+        txtNombrePlato.setText("-"+resIDT);
+
+
+
+       /* String dato = getIntent().getStringExtra("dato");
+        txtNombrePlato.setText("--"+ dato);*/
+
+
+      getData();
+
     }
 
 
@@ -73,17 +108,19 @@ public class DetalleMenu extends AppCompatActivity {
             JSONArray jsonArray = null;
 
             jsonArray = new JSONArray(json);
-            String nombrePlato = "";
+            String detallePlato = "";
 
 
             for (int i=0; i<jsonArray.length();i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                nombrePlato +="plato" +i+""+jsonObject.optString("plato")+ "\n";
 
-
+                detallePlato +="descripcion" +i+""+jsonObject.optString("descripcion")+ "\n";
             }
-            txtNombrePlato.setText(nombrePlato);
+
+
+
+            txtDetallePlato.setText(detallePlato);
 
         }
         catch (IOException e){

@@ -6,6 +6,7 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,8 +34,41 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
         pre3 = findViewById(R.id.txtprecio3);
         pre4 = findViewById(R.id.txtPrecio4);
 
-
         getData();
+
+    }
+
+   public void EnviarDatosPlato1 (View view){
+       Intent abrir_prod1 = new Intent(Menu.this, DetalleMenu.class);
+       abrir_prod1.putExtra("resID",R.drawable.seco_guanta);
+       abrir_prod1.putExtra("resIDT", txt1.getText().toString());
+
+
+       startActivity(abrir_prod1);
+    }
+
+    public void EnviarDatosPlato2 (View view){
+        Intent abrir_prod2 = new Intent(Menu.this, DetalleMenu.class);
+        abrir_prod2.putExtra("resID",R.drawable.seco_pollo);
+        abrir_prod2.putExtra("resIDT2", txt2.getText().toString());
+
+        startActivity(abrir_prod2);
+    }
+
+    public void EnviarDatosPlato3 (View view){
+        Intent abrir_prod3 = new Intent(Menu.this, DetalleMenu.class);
+        abrir_prod3.putExtra("resID",R.drawable.fritada);
+        abrir_prod3.putExtra("resIDT3", txt3.getText().toString());
+
+        startActivity(abrir_prod3);
+    }
+
+    public void EnviarDatosPlato4 (View view){
+        Intent abrir_prod4 = new Intent(Menu.this, DetalleMenu.class);
+        abrir_prod4.putExtra("resID",R.drawable.ceviche_camaron);
+        abrir_prod4.putExtra("resIDT4", txt4.getText().toString());
+
+        startActivity(abrir_prod4);
     }
 
     public void getData() {
@@ -60,18 +94,27 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
 
     }
 
-    public void plato1(){
+   /* public void plato1(){
         Intent abrir_prod1 = new Intent(Menu.this, DetalleMenu.class);
         abrir_prod1.putExtra("resID",R.drawable.seco_guanta);
         startActivity(abrir_prod1);
+    }*/
 
-    }
-    public void plato2(){
+
+
+    /*Intent i = new Intent(this, DetalleMenu.class);
+        i.putExtra("dato", txt1.getText().toString());
+    startActivity(i);*/
+
+
+
+  /*  public void plato2(){
         Intent abrir_prod1 = new Intent(Menu.this, DetalleMenu.class);
         abrir_prod1.putExtra("resID",R.drawable.seco_pollo);
+        abrir_prod1.putExtra("resIDT", txt1.getText().toString());
         startActivity(abrir_prod1);
 
-    }
+    }*/
     public void plato3(){
         Intent abrir_prod1 = new Intent(Menu.this, DetalleMenu.class);
         abrir_prod1.putExtra("resID",R.drawable.fritada);
@@ -89,16 +132,16 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.cv0:
-                plato1();
+              //  plato1();
                 break;
             case R.id.cv1:
-                plato2();
+              //   plato2();
                 break;
             case R.id.cv2:
-                plato3();
+            //    plato3();
                 break;
             case R.id.cv3:
-                plato4();
+               // plato4();
                 break;
         }
     }
