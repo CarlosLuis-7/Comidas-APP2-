@@ -39,12 +39,13 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
         cod4 = findViewById(R.id.cod4);
         getData();
 
+
     }
 
    public void EnviarDatosPlato1 (View view){
        Intent abrir_prod1 = new Intent(Menu.this, DetalleMenu.class);
        abrir_prod1.putExtra("resID",R.drawable.seco_guanta);
-       abrir_prod1.putExtra("resIDT", txt1.getText().toString());
+       abrir_prod1.putExtra("resIDT", cod1.getText().toString());
 
 
        startActivity(abrir_prod1);
@@ -53,7 +54,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
     public void EnviarDatosPlato2 (View view){
         Intent abrir_prod2 = new Intent(Menu.this, DetalleMenu.class);
         abrir_prod2.putExtra("resID",R.drawable.seco_pollo);
-        abrir_prod2.putExtra("resIDT2", txt2.getText().toString());
+        abrir_prod2.putExtra("resIDT2", cod2.getText().toString());
 
         startActivity(abrir_prod2);
     }
@@ -61,7 +62,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
     public void EnviarDatosPlato3 (View view){
         Intent abrir_prod3 = new Intent(Menu.this, DetalleMenu.class);
         abrir_prod3.putExtra("resID",R.drawable.fritada);
-        abrir_prod3.putExtra("resIDT3", txt3.getText().toString());
+        abrir_prod3.putExtra("resIDT3", cod3.getText().toString());
 
         startActivity(abrir_prod3);
     }
@@ -69,7 +70,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
     public void EnviarDatosPlato4 (View view){
         Intent abrir_prod4 = new Intent(Menu.this, DetalleMenu.class);
         abrir_prod4.putExtra("resID",R.drawable.ceviche_camaron);
-        abrir_prod4.putExtra("resIDT4", txt4.getText().toString());
+        abrir_prod4.putExtra("resIDT4", cod4.getText().toString());
 
         startActivity(abrir_prod4);
     }

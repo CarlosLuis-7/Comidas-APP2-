@@ -76,8 +76,9 @@ public class DetalleMenu extends AppCompatActivity {
         txtNombrePlato.setText("--"+ dato);*/
     clsMenu menu = new clsMenu();
     ConsumoRest consumo = new ConsumoRest();
-    menu=consumo.getDataMenuDetalle("1");
-
+    menu=consumo.getDataMenuDetalle(resIDT);
+        txtNombrePlato.setText(menu.getPlato());
+        txtNombrePlato.setText(menu.getDescripcion());
 
 
     }
