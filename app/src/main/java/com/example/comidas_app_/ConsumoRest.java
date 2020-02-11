@@ -1,8 +1,8 @@
 package com.example.comidas_app_;
 
 import android.os.StrictMode;
-import android.widget.Toast;
 
+import com.example.comidas_app_.Modelo.clsUsuarios;
 import com.example.comidas_app_.Modelo.clsMenu;
 
 import org.json.JSONArray;
@@ -141,5 +141,62 @@ public  class ConsumoRest {
 
         }
         return dtoMenu;
+    }
+
+    public  Boolean getDataUsuarios(String user , String pass)
+    {
+        Boolean respuesta = false;
+        //direccion de web service
+        //https://appcomida.azurewebsites.net/Usuarios
+
+        String sql = "https://appcomida.azurewebsites.net/api/Usuarios";
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        URL url=null;
+        HttpURLConnection conn;
+
+
+        try {
+            url = new URL(sql);
+            conn=(HttpURLConnection) url.openConnection();
+
+            conn.setRequestMethod("GET");
+            conn.connect();
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+            String json="";
+
+            while((inputLine=in.readLine())!=null){
+                response.append(inputLine);
+
+            }
+            json = response.toString();
+            JSONArray jsonArray = null;
+
+            jsonArray = new JSONArray(json);
+            String Usua = "";
+            String Passw = "";
+
+
+            for (int i=0; i<jsonArray.length();i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Usua =jsonObject.optString("usuar");
+                Passw = jsonObject.optString("pass");
+                if(Usua.equals(user) && Passw.equals(pass))
+                    respuesta= true;
+            }
+        }
+        catch (IOException e){
+
+
+
+        } catch (JSONException e) {
+
+
+        }
+        return respuesta;
     }
 }
