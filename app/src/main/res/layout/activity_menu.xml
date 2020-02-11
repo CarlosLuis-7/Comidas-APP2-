@@ -35,6 +35,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="@string/todo"
+                android:onClick="EnviarDatosPlato1"
                 app:srcCompat="@drawable/seco_guanta" />
 
             <LinearLayout
@@ -83,6 +84,7 @@
                 android:layout_width="338dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="EnviarDatosPlato2"
                 app:srcCompat="@drawable/seco_pollo" />
 
             <LinearLayout
@@ -128,6 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:contentDescription="@string/todo"
+                android:onClick="EnviarDatosPlato3"
                 app:srcCompat="@drawable/fritada" />
 
             <LinearLayout
@@ -172,6 +175,7 @@
                 android:layout_width="338dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="EnviarDatosPlato4"
                 app:srcCompat="@drawable/ceviche_camaron" />
 
             <LinearLayout
