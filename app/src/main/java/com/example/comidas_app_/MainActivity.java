@@ -11,6 +11,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextUsuario = findViewById(R.id.txt_email);
+        TextUsuario = findViewById(R.id.txt_usuario);
         TextPassword = findViewById(R.id.txt_password);
         btnRegistrar = findViewById(R.id.btn_registrar);
         btnLogin = findViewById(R.id.btnLogin);
@@ -41,41 +42,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-     private void loginUsuario(String URL){
-         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+     private void loginUsuario1(){
+         String url = "https://appcomida.azurewebsites.net/api/Usuarios";
+         RequestQueue requestQueue = Volley.newRequestQueue(this);
+         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
              @Override
              public void onResponse(String response) {
-                 try{
-                     JSONObject jsonResponse = new JSONObject(response);
-                     boolean success = jsonResponse.getBoolean("success");
-                     if (success) {
-                         Intent intent = new Intent(getApplicationContext(), Menu.class);
-                         startActivity(intent);
-                     } else {
-                         Toast.makeText(MainActivity.this, "Usuario o contraseña incorrecta", Toast.LENGTH_SHORT).show();
-                     }
-                 } catch (JSONException e) {
-                     e.printStackTrace();
+                 if (response.trim().equals("Success")) {
+                     Toast.makeText(getApplicationContext(), "Ingreso exitoso", Toast.LENGTH_SHORT).show();
+                     Intent intent = new Intent(getApplicationContext(), Menu.class);
+                     startActivity(intent);
+                 } else {
+                     Toast.makeText(MainActivity.this, "Usuario o contraseña incorrecta", Toast.LENGTH_SHORT).show();
                  }
-
              }
          }, new Response.ErrorListener(){
              @Override
              public void onErrorResponse(VolleyError error){
-                 Toast.makeText(MainActivity.this, error.toString(),Toast.LENGTH_SHORT).show();
+                 Toast.makeText(MainActivity.this, "error: "+ error.toString(),Toast.LENGTH_LONG).show();
 
              }
          }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError{
-                Map<String,String> parametros = new HashMap<String, String>();
-                parametros.put("usuar",TextUsuario.getText().toString());
-                parametros.put("pass",TextPassword.getText().toString());
-                return parametros;
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("usuar",TextUsuario.getText().toString());
+                params.put("pass",TextPassword.getText().toString());
+                return params;
              }
-
          };
-         RequestQueue requestQueue = Volley.newRequestQueue(this);
          requestQueue.add(stringRequest);
 
         /*/Obtenemos el email y la contraseña desde las cajas de texto
@@ -124,7 +119,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
 */
     }
+  /*  private void loginUsuario2() {
+        String url = "https://appcomida.azurewebsites.net/api/Usuarios";
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        JsonObjectRequest objres = new JsonObjectRequest(Request.Method.POST, url, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONObject objres = new JSONObject(response);
+                    Toast.makeText(getApplicationContext(), objres.toString(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), Menu.class);
+                    startActivity(intent);
+                } catch (JSONException e) {
+                    Toast.makeText(MainActivity.this, "Usuario o contraseña incorrecta", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this, "error: " + error.toString(), Toast.LENGTH_LONG).show();
 
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("usuar", TextUsuario.getText().toString());
+                params.put("pass", TextPassword.getText().toString());
+                return params;
+            }
+        };
+        requestQueue.add(jsonObjectRequest);
+    }
+*/
     private void registrarUsuario() {
 
         Intent abrir_reg = new Intent(MainActivity.this, Registro.class );
@@ -138,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 registrarUsuario();
                 break;
             case R.id.btnLogin:
-                loginUsuario("https://appcomida.azurewebsites.net/api/Usuarios");
+                loginUsuario1();
                 break;
         }
     }

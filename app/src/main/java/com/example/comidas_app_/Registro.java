@@ -3,8 +3,10 @@ package com.example.comidas_app_;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,7 +27,7 @@ import java.util.Iterator;
 
 public class Registro extends AppCompatActivity {
     EditText nom,ape,usu,cel,con;
-    private ProgressDialog progressDialog;
+    Button guar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +39,19 @@ public class Registro extends AppCompatActivity {
         usu = findViewById(R.id.txtUsu);
         cel = findViewById(R.id.txtCel);
         con = findViewById(R.id.txtPwd);
-        progressDialog = new ProgressDialog(this);
+        guar = findViewById(R.id.btnGuardar);
+
+        guar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                registrarUsuario();
+            }
+        });
     }
 
     public void registrarUsuario()
     {
-        //Verificamos que las cajas de texto no esten vacías
+        /*/Verificamos que las cajas de texto no esten vacías
         if (null == usu.getText()) {
             Toast.makeText(this, "Se debe ingresar un usuario", Toast.LENGTH_LONG).show();
             return;
@@ -64,7 +73,7 @@ public class Registro extends AppCompatActivity {
             Toast.makeText(this, "Falta ingresar la contraseña", Toast.LENGTH_LONG).show();
             return;
         }
-
+*/
             String sql ="https://appcomida.azurewebsites.net/api/Usuarios";
             URL url = null;
             try {
@@ -91,7 +100,7 @@ public class Registro extends AppCompatActivity {
                 //OBTENER EL RESULTADO DEL REQUEST
                 OutputStream os = urlConnection.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-                //writer.write(getPostDataString(parametrosPost));
+                writer.write(getPostDataString(parametrosPost));
                 writer.flush();
                 writer.close();
                 os.close();
@@ -101,8 +110,8 @@ public class Registro extends AppCompatActivity {
                     BufferedReader in= new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 
                     StringBuffer sb= new StringBuffer("");
-                    String linea="";
-                    while ((linea=in.readLine())!= null){
+                    String linea = "";
+                    while ((linea = in.readLine())!= null){
                         sb.append(linea);
                         break;
 
@@ -124,9 +133,8 @@ public class Registro extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-        progressDialog.setMessage("Realizando registro en linea...");
-        progressDialog.show();
+        Intent abrir_main = new Intent(Registro.this, MainActivity.class );
+        startActivity(abrir_main);
         }
 
     //FUNCIONES----------------------------------------------------------------------
@@ -153,5 +161,6 @@ public class Registro extends AppCompatActivity {
         }
         return result.toString();
     }
+
 }
 
