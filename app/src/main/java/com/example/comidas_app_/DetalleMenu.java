@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.comidas_app_.Modelo.clsMenu;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,6 +24,7 @@ import java.net.URL;
 
 
 public class DetalleMenu extends AppCompatActivity {
+
     ImageView img;
     TextView txtNombrePlato, txtDetallePlato, txtCantidad1;
     Button btnAumentar, btnDisminuir;
@@ -71,66 +74,14 @@ public class DetalleMenu extends AppCompatActivity {
 
        /* String dato = getIntent().getStringExtra("dato");
         txtNombrePlato.setText("--"+ dato);*/
+    clsMenu menu = new clsMenu();
+    ConsumoRest consumo = new ConsumoRest();
+    menu=consumo.getDataMenuDetalle("1");
 
 
-      getData();
 
     }
 
 
-    public void getData(){
-        //direccion de web service
-        String sql = "https://appcomida.azurewebsites.net/api/Menus";
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-        URL url=null;
-        HttpURLConnection conn;
-
-
-        try {
-            url = new URL(sql);
-            conn=(HttpURLConnection) url.openConnection();
-
-            conn.setRequestMethod("GET");
-            conn.connect();
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
-            String json="";
-
-            while((inputLine=in.readLine())!=null){
-                response.append(inputLine);
-
-            }
-            json = response.toString();
-            JSONArray jsonArray = null;
-
-            jsonArray = new JSONArray(json);
-            String detallePlato = "";
-
-
-            for (int i=0; i<jsonArray.length();i++){
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-
-                detallePlato +="descripcion" +i+""+jsonObject.optString("descripcion")+ "\n";
-            }
-
-
-
-            txtDetallePlato.setText(detallePlato);
-
-        }
-        catch (IOException e){
-            Toast.makeText(getApplicationContext(),e.getMessage(), Toast.LENGTH_LONG).show();
-
-
-        } catch (JSONException e) {
-            Toast.makeText(getApplicationContext(),e.getMessage(), Toast.LENGTH_LONG).show();
-
-        }
-    }
 
 }
