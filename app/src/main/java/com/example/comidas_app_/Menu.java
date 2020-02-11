@@ -18,7 +18,7 @@ import com.example.comidas_app_.Modelo.clsMenu;
 import java.util.ArrayList;
 
 public class Menu extends AppCompatActivity implements View.OnClickListener{
-    TextView txt1, txt2, txt3, txt4, pre1, pre2, pre3, pre4;
+    TextView txt1, txt2, txt3, txt4, pre1, pre2, pre3, pre4,cod1,cod2,cod3,cod4;
     ImageView img1,img2,img3,img4;
 
     @Override
@@ -33,7 +33,10 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
         pre2 = findViewById(R.id.txtprecio2);
         pre3 = findViewById(R.id.txtprecio3);
         pre4 = findViewById(R.id.txtPrecio4);
-
+        cod1 = findViewById(R.id.cod1);
+        cod2 = findViewById(R.id.cod2);
+        cod3 = findViewById(R.id.cod3);
+        cod4 = findViewById(R.id.cod4);
         getData();
 
     }
@@ -76,15 +79,19 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
         ArrayList<clsMenu> Datas = datos.getDataMenu();
         for (int i = 0; i < Datas.size(); i++) {
             if (i == 0) {
+                cod1.setText(Datas.get(i).getCodigo());
                 txt1.setText(Datas.get(i).getPlato());
                 pre1.setText(Double.toString(Datas.get(i).getPrecio()));
             } else if (i == 1) {
+                cod2.setText(Datas.get(i).getCodigo());
                 txt2.setText(Datas.get(i).getPlato());
                 pre2.setText(Double.toString(Datas.get(i).getPrecio()));
             } else if (i == 2) {
+                cod3.setText(Datas.get(i).getCodigo());
                 txt3.setText(Datas.get(i).getPlato());
                 pre3.setText(Double.toString(Datas.get(i).getPrecio()));
             } else if (i == 3) {
+                cod4.setText(Datas.get(i).getCodigo());
                 txt4.setText(Datas.get(i).getPlato());
                 pre4.setText(Double.toString(Datas.get(i).getPrecio()));
             }
