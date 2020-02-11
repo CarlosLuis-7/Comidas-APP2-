@@ -79,8 +79,6 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
         ArrayList<clsMenu> Datas = datos.getDataMenu();
         for (int i = 0; i < Datas.size(); i++) {
             if (i == 0)  {
-
-
                 txt1.setText(Datas.get(i).getPlato());
                 pre1.setText(Double.toString(Datas.get(i).getPrecio()));
             } else if (i == 1) {
