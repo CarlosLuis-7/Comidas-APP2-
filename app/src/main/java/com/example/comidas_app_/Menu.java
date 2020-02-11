@@ -51,7 +51,8 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
    public void EnviarDatosPlato1 (View view){
        Intent abrir_prod1 = new Intent(Menu.this, DetalleMenu.class);
        abrir_prod1.putExtra("resID",R.drawable.seco_guanta);
-       abrir_prod1.putExtra("resIDT", txt1.getText().toString());
+     //  abrir_prod1.putExtra("resIDT", txt1.getText().toString());
+
 
 
        startActivity(abrir_prod1);
@@ -81,11 +82,15 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
         startActivity(abrir_prod4);
     }
 
+
     public void getData() {
+
         ConsumoRest datos = new ConsumoRest();
         ArrayList<clsMenu> Datas = datos.getDataMenu();
         for (int i = 0; i < Datas.size(); i++) {
-            if (i == 0) {
+            if (i == 0)  {
+
+
                 txt1.setText(Datas.get(i).getPlato());
                 pre1.setText(Double.toString(Datas.get(i).getPrecio()));
             } else if (i == 1) {
