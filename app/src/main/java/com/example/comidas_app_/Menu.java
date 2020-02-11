@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 public class Menu extends AppCompatActivity implements View.OnClickListener{
     TextView txt1, txt2, txt3, txt4, pre1, pre2, pre3, pre4;
+    String cod1, cod2, cod3, cod4;
     ImageView img1,img2,img3,img4;
 
     @Override
@@ -33,7 +34,6 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
         pre2 = findViewById(R.id.txtprecio2);
         pre3 = findViewById(R.id.txtprecio3);
         pre4 = findViewById(R.id.txtPrecio4);
-
         getData();
 
     }
@@ -41,7 +41,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
    public void EnviarDatosPlato1 (View view){
        Intent abrir_prod1 = new Intent(Menu.this, DetalleMenu.class);
        abrir_prod1.putExtra("resID",R.drawable.seco_guanta);
-     //  abrir_prod1.putExtra("resIDT", txt1.getText().toString());
+      abrir_prod1.putExtra("resIDT", cod1.toString());
 
 
 
@@ -51,7 +51,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
     public void EnviarDatosPlato2 (View view){
         Intent abrir_prod2 = new Intent(Menu.this, DetalleMenu.class);
         abrir_prod2.putExtra("resID",R.drawable.seco_pollo);
-        abrir_prod2.putExtra("resIDT2", txt2.getText().toString());
+        abrir_prod2.putExtra("resIDT2", cod2.toString());
 
         startActivity(abrir_prod2);
     }
@@ -59,7 +59,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
     public void EnviarDatosPlato3 (View view){
         Intent abrir_prod3 = new Intent(Menu.this, DetalleMenu.class);
         abrir_prod3.putExtra("resID",R.drawable.fritada);
-        abrir_prod3.putExtra("resIDT3", txt3.getText().toString());
+        abrir_prod3.putExtra("resIDT3", cod3.toString());
 
         startActivity(abrir_prod3);
     }
@@ -67,7 +67,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
     public void EnviarDatosPlato4 (View view){
         Intent abrir_prod4 = new Intent(Menu.this, DetalleMenu.class);
         abrir_prod4.putExtra("resID",R.drawable.ceviche_camaron);
-        abrir_prod4.putExtra("resIDT4", txt4.getText().toString());
+        abrir_prod4.putExtra("resIDT4", cod4.toString());
 
         startActivity(abrir_prod4);
     }
@@ -78,18 +78,20 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
         ConsumoRest datos = new ConsumoRest();
         ArrayList<clsMenu> Datas = datos.getDataMenu();
         for (int i = 0; i < Datas.size(); i++) {
-            if (i == 0)  {
-
-
+            if (i == 0 )  {
+                cod1 = Integer.toString(Datas.get(i).getCodigo());
                 txt1.setText(Datas.get(i).getPlato());
                 pre1.setText(Double.toString(Datas.get(i).getPrecio()));
             } else if (i == 1) {
+                cod2 = Integer.toString(Datas.get(i).getCodigo());
                 txt2.setText(Datas.get(i).getPlato());
                 pre2.setText(Double.toString(Datas.get(i).getPrecio()));
             } else if (i == 2) {
+                cod3 = Integer.toString(Datas.get(i).getCodigo());
                 txt3.setText(Datas.get(i).getPlato());
                 pre3.setText(Double.toString(Datas.get(i).getPrecio()));
             } else if (i == 3) {
+                cod4 = Integer.toString(Datas.get(i).getCodigo());
                 txt4.setText(Datas.get(i).getPlato());
                 pre4.setText(Double.toString(Datas.get(i).getPrecio()));
             }

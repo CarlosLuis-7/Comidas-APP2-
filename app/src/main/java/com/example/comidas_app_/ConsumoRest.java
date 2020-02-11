@@ -110,16 +110,8 @@ public  class ConsumoRest {
 
             }
             json = response.toString();
-            JSONArray jsonArray = null;
 
-            jsonArray = new JSONArray(json);
-            String Plato = "";
-            String Precio = "";
-            String Descrip = "";
-
-
-            for (int i=0; i<jsonArray.length();i++){
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
+            JSONObject jsonObject = new JSONObject(json);
 
                 dtoMenu.setCodigo(Integer.parseInt(jsonObject.optString("codigo")));
                 dtoMenu.setPlato(jsonObject.optString("plato"));
@@ -127,12 +119,11 @@ public  class ConsumoRest {
                 dtoMenu.setPrecio(Double.parseDouble(jsonObject.optString("precio")));
 
 
-            }
-            //txt1.setText(Plato);
-            // pre1.setText(Precio);
-
         }
-        catch (IOException e){
+        catch (IOException e)
+        {
+
+
 
 
 
@@ -199,4 +190,5 @@ public  class ConsumoRest {
         }
         return respuesta;
     }
+
 }
