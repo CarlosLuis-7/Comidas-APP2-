@@ -28,4 +28,6 @@
     <string name="registrar">Registrar</string>
     <string name="ingrese_su_usuario">ingrese su usuario</string>
     <string name="ingrese_una_contrase_a">ingrese una contraseña</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="mi_ubicaci_n">Mi Ubicación</string>
 </resources>
